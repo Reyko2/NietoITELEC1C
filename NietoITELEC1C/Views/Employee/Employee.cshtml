@@ -1,0 +1,68 @@
+﻿@*
+   
+*@
+@{
+    // Declare variables
+    var FirstName = "Rico";
+    var LastName = "Nieto";
+    DateTime Birthday = new DateTime(2002, 1, 4); 
+    bool IsTenured = true; 
+    decimal SalaryPerHour = 500; 
+    var Email = "rico.nieto.cics@ust.edu.ph";
+
+    // Calculate age
+    DateTime currentDate = DateTime.Now;
+    int age = DateTime.Now.Year - Birthday.Year;
+
+    if (Birthday.AddYears(age) > currentDate)
+    {
+        age--;
+    }
+   
+
+    // Domain and username from email
+    string[] emailParts = Email.Split('@');
+    var Username = emailParts[0];
+    var Domain = emailParts[1];
+
+    // Calculate salary
+    decimal SalaryPerDay = SalaryPerHour * 8;
+    decimal SalaryPerMonth = SalaryPerDay * 30;
+    if (IsTenured)
+    {
+        SalaryPerMonth += 500;
+    }
+}
+
+<input type="checkbox" class="theme-checkbox" id="night">
+<h2>Employee Dataview</h2>
+<div class="text-center">
+    <h3>
+        A. Sample output:
+    </h3>
+        <p>"I'm @FirstName @LastName and I'm @age yrs. old"</p>
+</div>
+
+<div class="text-center">
+    <h3>
+        B. Sample output:
+    </h3>
+        <p>
+            Email: @Email <br />
+            Domain: @Domain<br />
+            Username: @Username <br />
+        </p>
+</div>
+<div class="text-center">
+    <h3>
+        C. Sample Output:
+        </h3>
+        <p>
+            Name: @FirstName @LastName <br />
+            email: @Email <br />
+            status: @(IsTenured ? "Permanent" : "Probationary") <br />
+            Daily Salary: ₱@SalaryPerDay <br />
+            Monthly Salary: ₱@SalaryPerMonth <br />
+
+        </p>
+</div>

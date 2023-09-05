@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    DateTime date = DateTime.Now;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome CICS</h1>
+    <p>@DateTime.Now</p>
+    @{
+        string period;
+
+        if (date.Hour >= 6 && date.Hour < 12)
+        {
+            period = "morning";
+        }
+        else if (date.Hour >= 12 && date.Hour < 18)
+        {
+            period = "afternoon";
+        }
+        else
+        {
+            period = "evening";
+        }
+
+        string formattedDate = date.ToString("dddd, MMMM d");
+
+        <p>It is @period on @formattedDate</p>
+    }
+</div>
+
+<script>
+    var period = @Html.Raw(Json.Serialize(period));
+
+    var body = document.body;
+
+    if (period === 'evening') {
+        body.classList.add('dark');
+    }
+</script>
+
+
+
+
+
+
+
+
