@@ -1,6 +1,7 @@
 ﻿@*
    
 *@
+
 @{
     // Declare variables
     var FirstName = "Rico";
@@ -81,4 +82,28 @@
             <td>@TransmutedGrade</td>
         </tr>
     </table>
+    </div>
+    <br />
+    <div>
+        <table class="table table-danger">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Birthday</th>
+                <th>Major</th>
+                <th>Details</th>
+            </tr>
+
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.FirstName @student.LastName</td>
+                    <td>@student.Email</td>
+                    <td>@student.Birthday</td>
+                    <td>@student.Major</td>
+                <td> <a asp-action="showDetails" asp-route-id="@student.Id">Show Details</a> </td>
+                </tr>
+            }
+        </table>
+    </div>
 
