@@ -6,33 +6,40 @@
 <h1>Add Instructor</h1>
 
 <form action="AddInstructor" method="post">
-    <div class="form-group">
-        <label asp-for="Id">ID</label>
-        <input asp-for="Id" class="form-control">
-
-    </div>
-    <div class="form-group">
-        <label asp-for="FirstName">First Name</label>
-        <input asp-for="FirstName" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="LastName">Last Name</label>
-        <input asp-for="LastName" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="Status">Status</label>
-        <select asp-for="Status" class="form-control">
-            <option value="permanent">Permanent</option>
-            <option value="probationary">Probationary</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label asp-for="Rank">Course</label>
-        <select asp-for="Rank" asp-items="Html.GetEnumSelectList(typeof(Rank))"> class="form-control" /></select>
-
-        <div class="form-group">
-            <label asp-for="HiringDate">Date</label>
-            <input asp-for="HiringDate" class="form-control" />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Id">ID</label>
+                <input asp-for="Id" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName">First Name</label>
+                <input asp-for="FirstName" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName">Last Name</label>
+                <input asp-for="LastName" class="form-control">
+            </div>
         </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Status">Status</label>
+                <select asp-for="Status" class="form-control">
+                    <option value="permanent">Permanent</option>
+                    <option value="probationary">Probationary</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rank">Rank</label>
+                <select asp-for="Rank" asp-items="Html.GetEnumSelectList(typeof(Rank))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="HiringDate">Hiring Date</label>
+                <input asp-for="HiringDate" class="form-control" type="date">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </form>
