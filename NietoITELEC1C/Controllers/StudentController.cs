@@ -51,14 +51,14 @@ namespace NietoITELEC1C.Controllers
         }
         public IActionResult showDetails(int id)
         {
-            //Search for the student whose id matches the given id
             Student? student = StudentList.FirstOrDefault(st => st.Id == id);
 
-            if (student != null)//was an student found?
+            if (student != null)
                 return View(student);
 
             return NotFound();
         }
+
         [HttpGet]
         public IActionResult AddStudent()
         {
@@ -69,7 +69,39 @@ namespace NietoITELEC1C.Controllers
         public IActionResult AddStudent(Student newStudent)
         {
             StudentList.Add(newStudent);
-            return View("Student",StudentList);
+            return View("Student", StudentList);
         }
+
+
+
+        [HttpGet]
+        public IActionResult EditStudent(int id)
+        {
+            Student? student = StudentList.FirstOrDefault(st => st.Id == id);
+
+            if (student != null)
+            {
+                return View(student);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult EditStudent(Student updStudent)
+        {
+            Student? student = StudentList.FirstOrDefault(st => st.Id == updStudent.Id);
+
+            if (student != null)
+            {
+                student.Id = updStudent.Id;
+                student.FirstName = updStudent.FirstName;
+                student.LastName = updStudent.LastName;
+                student.Email = updStudent.Email;
+                student.Birthday = updStudent.Birthday;
+                student.Major = updStudent.Major;
+            }
+            return View("Student", StudentList);
+        }
+       
     }
 }

@@ -63,5 +63,43 @@ namespace NietoITELEC1C.Controllers
             return View("Instructor", InstructorList);
         }
 
+
+
+
+
+
+
+
+
+
+
+        [HttpPost]
+        public IActionResult EditInstructor(Instructor newInstructor)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(st => st.Id == newInstructor.Id);
+
+            if (instructor != null)
+            {
+                instructor.Id = newInstructor.Id;
+                instructor.FirstName = newInstructor.FirstName;
+                instructor.LastName = newInstructor.LastName;
+                instructor.Status = newInstructor.Status;
+                instructor.HiringDate = newInstructor.HiringDate;
+                instructor.Rank = newInstructor.Rank;
+            }
+            return View("Instructor", InstructorList);
+        }
+
+        [HttpGet]
+        public IActionResult EditInstructor(int id)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(st => st.Id == id);
+
+            if (instructor != null)
+            {
+                return View(instructor);
+            }
+            return NotFound();
+        }
     }
 }

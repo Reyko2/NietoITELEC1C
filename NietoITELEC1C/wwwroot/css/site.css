@@ -6,6 +6,10 @@ navbar {
     z-index: 10;
 }
 
+.bttn {
+    margin-left: 80px;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;

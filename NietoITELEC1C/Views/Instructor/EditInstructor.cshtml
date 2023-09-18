@@ -3,14 +3,14 @@
 @{
 }
 
-<h1>Add Instructor</h1>
+<h1>Edit Instructor</h1>
 
-<form action="AddInstructor" method="post">
+<form action="EditInstructor" method="post">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="Id">ID</label>
-                <input asp-for="Id" class="form-control">
+                <input asp-for="Id" class="form-control" readonly>
             </div>
             <div class="form-group">
                 <label asp-for="FirstName">First Name</label>
@@ -24,7 +24,8 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="Status">Status</label>
-                <select asp-for="Status" class="form-control"><option disabled selected></option>
+                <select asp-for="Status" class="form-control">
+                    <option disabled selected></option>
                     <option value="permanent">Permanent</option>
                     <option value="probationary">Probationary</option>
                 </select>
@@ -39,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn bttn btn-secondary" onclick="history.back();">Cancel</button>
+        
 </form>
