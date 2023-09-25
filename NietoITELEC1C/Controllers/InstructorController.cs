@@ -1,49 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NietoITELEC1C.Models;
+using NietoITELEC1C.Services;
 
 namespace NietoITELEC1C.Controllers
 {
     public class InstructorController : Controller
     {
+        private readonly ImyFakeDataService _fakeData;
 
-            List<Instructor> InstructorList = new List<Instructor>()
-            {
-                new Instructor()
-                {
-                    Id = 1,
-                    FirstName = "Caster",
-                    LastName = "Lopez",
-                    HiringDate = DateTime.Parse("8/09/2023"),
-                    Rank = Rank.AssistantProfessor,
-                    Status = false
-                },
-               new Instructor()
-                {
-                    Id = 2,
-                    FirstName = "Gelo",
-                    LastName = "Filomeno",
-                    HiringDate = DateTime.Parse("04/01/2016"),
-                    Rank = Rank.Professor,
-                    Status = true
-                },
-                new Instructor()
-                {
-                    Id = 3,
-                    FirstName = "Draico",
-                    LastName = "Gallardo",
-                    HiringDate = DateTime.Parse("04/01/2022"),
-                    Rank = Rank.Instructor,
-                    Status = false
-                }
-                };
+        public InstructorController(ImyFakeDataService fakeData)
+        {
+            _fakeData = fakeData;
+        }
+
         public IActionResult Instructor()
         {
-            return View(InstructorList);
+            return View(_fakeData.InstructorList);
         }
         public IActionResult showDetails(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = InstructorList.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -59,24 +36,26 @@ namespace NietoITELEC1C.Controllers
         [HttpPost]
         public IActionResult AddInstructor(Instructor newInstructor)
         {
-            InstructorList.Add(newInstructor);
-            return View("Instructor", InstructorList);
+            _fakeData.InstructorList.Add(newInstructor);
+            return View("Instructor", _fakeData.InstructorList);
         }
 
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == id);
+            _fakeData.InstructorList.Remove(instructor);
+            return View("Instructor", _fakeData.InstructorList);
 
-
-
-
-
-
+        }
 
 
 
         [HttpPost]
         public IActionResult EditInstructor(Instructor newInstructor)
         {
-            Instructor? instructor = InstructorList.FirstOrDefault(st => st.Id == newInstructor.Id);
+            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == newInstructor.Id);
 
             if (instructor != null)
             {
@@ -87,19 +66,40 @@ namespace NietoITELEC1C.Controllers
                 instructor.HiringDate = newInstructor.HiringDate;
                 instructor.Rank = newInstructor.Rank;
             }
-            return View("Instructor", InstructorList);
+            return View("Instructor", _fakeData.InstructorList);
         }
 
         [HttpGet]
         public IActionResult EditInstructor(int id)
         {
-            Instructor? instructor = InstructorList.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)
             {
                 return View(instructor);
             }
             return NotFound();
+        }
+
+        [HttpGet]
+        public IActionResult DeleteInstructor(int id)
+        {
+            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == id);
+
+            if (instructor != null)
+            {
+                return View(instructor);
+            }
+            return NotFound();
+
+        }
+
+        [HttpPost]
+        public IActionResult DeleteInstructor(Instructor delInstructor)
+        {
+            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == delInstructor.Id);
+            _fakeData.InstructorList.Remove(instructor);
+            return View("Instructor", _fakeData.InstructorList);
         }
     }
 }

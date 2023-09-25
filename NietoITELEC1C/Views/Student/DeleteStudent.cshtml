@@ -1,0 +1,43 @@
+﻿@model Student;
+
+@{
+}
+
+<h1>Delete Yes?</h1>
+
+<form action="DeleteStudent" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Id">ID</label>
+                <input asp-for="Id" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName">First Name</label>
+                <input asp-for="FirstName" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName">Last Name</label>
+                <input asp-for="LastName" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label asp-for="Major">Course</label>
+                <select asp-for="Major" asp-items="Html.GetEnumSelectList(typeof(Major))" class="form-control" disabled><option></option></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birthday">Birthday</label>
+                <input asp-for="Birthday" class="form-control" type="date" readonly>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <button type="button" class="btn bttn btn-secondary" onclick="history.back();">Cancel</button>
+
+</form>
+
