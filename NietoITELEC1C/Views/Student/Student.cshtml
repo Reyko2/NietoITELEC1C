@@ -102,7 +102,7 @@
                 <tr>
                     <td>@student.FirstName @student.LastName</td>
                     <td>@student.Email</td>
-                    <td>@student.Birthday</td>
+                    <td>@student.Birthday.ToString("d")</td>
                     <td>@student.Major</td>
                 <td><a class="btn btn-primary" a asp-action="showDetails" asp-route-id="@student.Id">Show Details</a> </td>
                 <td><a class="btn btn-primary" a asp-action="EditStudent" asp-route-id="@student.Id">Edit</a><a class="btn bttn2 btn-danger" a asp-action="DeleteStudent" asp-route-id="@student.Id">Delete</a></td>

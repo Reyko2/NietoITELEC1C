@@ -37,18 +37,19 @@ namespace NietoITELEC1C.Controllers
         public IActionResult AddInstructor(Instructor newInstructor)
         {
             _fakeData.InstructorList.Add(newInstructor);
-            return View("Instructor", _fakeData.InstructorList);
+            //return View("Instructor", _fakeData.InstructorList);
+            return RedirectToAction("Instructor");
         }
 
 
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == id);
-            _fakeData.InstructorList.Remove(instructor);
-            return View("Instructor", _fakeData.InstructorList);
+        //[HttpGet]
+        //public IActionResult Delete(int id)
+        //{
+          //  Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == id);
+           // _fakeData.InstructorList.Remove(instructor);
+           // return View("Instructor", _fakeData.InstructorList);
 
-        }
+        //}
 
 
 
@@ -66,7 +67,7 @@ namespace NietoITELEC1C.Controllers
                 instructor.HiringDate = newInstructor.HiringDate;
                 instructor.Rank = newInstructor.Rank;
             }
-            return View("Instructor", _fakeData.InstructorList);
+            return RedirectToAction("Instructor");
         }
 
         [HttpGet]
@@ -99,7 +100,7 @@ namespace NietoITELEC1C.Controllers
         {
             Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == delInstructor.Id);
             _fakeData.InstructorList.Remove(instructor);
-            return View("Instructor", _fakeData.InstructorList);
+            return RedirectToAction("Instructor");
         }
     }
 }
