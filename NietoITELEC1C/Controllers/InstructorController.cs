@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NietoITELEC1C.Data;
 using NietoITELEC1C.Models;
 using NietoITELEC1C.Services;
 
@@ -6,21 +7,21 @@ namespace NietoITELEC1C.Controllers
 {
     public class InstructorController : Controller
     {
-        private readonly ImyFakeDataService _fakeData;
+        private readonly AppDbContext _dbContext;
 
-        public InstructorController(ImyFakeDataService fakeData)
+        public InstructorController(AppDbContext dbContext)
         {
-            _fakeData = fakeData;
+            _dbContext = dbContext;
         }
 
         public IActionResult Instructor()
         {
-            return View(_fakeData.InstructorList);
+            return View(_dbContext.Instructors);
         }
         public IActionResult showDetails(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -36,8 +37,9 @@ namespace NietoITELEC1C.Controllers
         [HttpPost]
         public IActionResult AddInstructor(Instructor newInstructor)
         {
-            _fakeData.InstructorList.Add(newInstructor);
+            _dbContext.Instructors.Add(newInstructor);
             //return View("Instructor", _fakeData.InstructorList);
+            _dbContext.SaveChanges();
             return RedirectToAction("Instructor");
         }
 
@@ -56,7 +58,7 @@ namespace NietoITELEC1C.Controllers
         [HttpPost]
         public IActionResult EditInstructor(Instructor newInstructor)
         {
-            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == newInstructor.Id);
+            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == newInstructor.Id);
 
             if (instructor != null)
             {
@@ -67,13 +69,14 @@ namespace NietoITELEC1C.Controllers
                 instructor.HiringDate = newInstructor.HiringDate;
                 instructor.Rank = newInstructor.Rank;
             }
+            _dbContext.SaveChanges();
             return RedirectToAction("Instructor");
         }
 
         [HttpGet]
         public IActionResult EditInstructor(int id)
         {
-            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)
             {
@@ -85,7 +88,7 @@ namespace NietoITELEC1C.Controllers
         [HttpGet]
         public IActionResult DeleteInstructor(int id)
         {
-            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)
             {
@@ -98,8 +101,9 @@ namespace NietoITELEC1C.Controllers
         [HttpPost]
         public IActionResult DeleteInstructor(Instructor delInstructor)
         {
-            Instructor? instructor = _fakeData.InstructorList.FirstOrDefault(st => st.Id == delInstructor.Id);
-            _fakeData.InstructorList.Remove(instructor);
+            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == delInstructor.Id);
+            _dbContext.Instructors.Remove(instructor);
+            _dbContext.SaveChanges();
             return RedirectToAction("Instructor");
         }
     }

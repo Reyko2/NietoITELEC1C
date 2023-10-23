@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NietoITELEC1C.Data;
 using NietoITELEC1C.Models;
 using NietoITELEC1C.Services;
 
@@ -6,11 +7,11 @@ namespace NietoITELEC1C.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly ImyFakeDataService _fakeData;
+        private readonly AppDbContext _dbContext;
 
-        public StudentController(ImyFakeDataService fakeData)
+        public StudentController(AppDbContext dbContext)
         {
-            _fakeData = fakeData;
+            _dbContext = dbContext;
         }
             /* var st = new Student();
              * st.FirstName = "Rico";
@@ -25,11 +26,11 @@ namespace NietoITELEC1C.Controllers
             
         public IActionResult Student()
         {
-            return View(_fakeData.StudentList);
+            return View(_dbContext.Students);
         }
         public IActionResult showDetails(int id)
         {
-            Student? student = _fakeData.StudentList.FirstOrDefault(st => st.Id == id);
+            Student? student = _dbContext.Students.FirstOrDefault(st => st.Id == id);
 
             if (student != null)
                 return View(student);
@@ -46,7 +47,8 @@ namespace NietoITELEC1C.Controllers
         [HttpPost]
         public IActionResult AddStudent(Student newStudent)
         {
-            _fakeData.StudentList.Add(newStudent);
+            _dbContext.Students.Add(newStudent);
+            _dbContext.SaveChanges();
             return RedirectToAction("Student");
         }
 
@@ -54,7 +56,7 @@ namespace NietoITELEC1C.Controllers
         [HttpGet]
         public IActionResult EditStudent(int id)
         {
-            Student? student = _fakeData.StudentList.FirstOrDefault(st => st.Id == id);
+            Student? student = _dbContext.Students.FirstOrDefault(st => st.Id == id);
 
             if (student != null)
             {
@@ -67,7 +69,7 @@ namespace NietoITELEC1C.Controllers
         [HttpPost]
         public IActionResult EditStudent(Student updStudent)
         {
-            Student? student = _fakeData.StudentList.FirstOrDefault(st => st.Id == updStudent.Id);
+            Student? student = _dbContext.Students.FirstOrDefault(st => st.Id == updStudent.Id);
 
             if (student != null)
             {
@@ -78,6 +80,7 @@ namespace NietoITELEC1C.Controllers
                 student.Birthday = updStudent.Birthday;
                 student.Major = updStudent.Major;
             }
+            _dbContext.SaveChanges();
             return RedirectToAction("Student");
             //return View("Student", _fakeData.StudentList);
         }
@@ -85,7 +88,7 @@ namespace NietoITELEC1C.Controllers
         [HttpGet]
         public IActionResult DeleteStudent(int id)
         {
-            Student? student = _fakeData.StudentList.FirstOrDefault(st => st.Id == id);
+            Student? student = _dbContext.Students.FirstOrDefault(st => st.Id == id);
 
             if (student != null)
             {
@@ -98,8 +101,9 @@ namespace NietoITELEC1C.Controllers
         [HttpPost]
         public IActionResult DeleteStudent(Student delStudent)
         {
-            Student? student = _fakeData.StudentList.FirstOrDefault(st => st.Id == delStudent.Id);
-            _fakeData.StudentList.Remove(student);
+            Student? student = _dbContext.Students.FirstOrDefault(st => st.Id == delStudent.Id);
+            _dbContext.Students.Remove(student);
+            _dbContext.SaveChanges();
             return RedirectToAction("Student");
             //return View("Student", _fakeData.StudentList);
         }
