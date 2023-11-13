@@ -4,39 +4,43 @@
 }
 
 <h1>Add Student</h1>
+<style>
+    span {
+        color: red;
+    }
+</style>
+<form asp-action="AddStudent" method="post">
+ @*    <div class="form-group">
+        <label asp-for="Id" hidden>ID</label>
+        <input asp-for="Id" class="form-control" />
+    </div> *@
 
-<form action="AddStudent" method="post">
-    <div class="row">
-        <div class="col-md-6">
-           @*  <div class="form-group">
-                <label asp-for="Id">ID</label>
-                <input asp-for="Id" class="form-control">
-            </div> *@
-            <div class="form-group">
-                <label asp-for="FirstName">First Name</label>
-                <input asp-for="FirstName" class="form-control">
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName">Last Name</label>
-                <input asp-for="LastName" class="form-control">
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="Email">Email</label>
-                <input asp-for="Email" class="form-control">
-            </div>
-            <div class="form-group">
-                <label asp-for="Major">Course</label>
-                <select asp-for="Major" asp-items="Html.GetEnumSelectList(typeof(Major))" class="form-control"><option disabled selected></option></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Birthday">Birthday</label>
-                <input asp-for="Birthday" class="form-control" type="date">
-            </div>
-        </div>
+    <div class="form-group">
+        <label asp-for="FirstName">First Name</label>
+        <span asp-validation-for="FirstName"></span>
+        <input asp-for="FirstName" class="form-control"/>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <label asp-for="LastName">Last Name</label>
+        <span asp-validation-for="LastName"></span>
+        <input asp-for="LastName" class="form-control" />
     </div>
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <span asp-validation-for="Email"></span>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Birthday">Birthday</label>
+        <span asp-validation-for="Birthday"></span>
+        <input asp-for="Birthday" class="form-control" type="date"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Major">Major</label>
+        <span asp-validation-for="Major"></span>
+        <select asp-for="Major" asp-items="Html.GetEnumSelectList(typeof(Major))" class="form-control"><option disabled selected></option></select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+

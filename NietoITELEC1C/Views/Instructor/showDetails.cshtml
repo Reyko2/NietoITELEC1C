@@ -28,6 +28,6 @@
     </tr>
     <tr>
         <th>Hiring Date</th>
-        <td>@Model.HiringDate.ToString("d")</td>
+        <td>@(Model.HiringDate.HasValue ? Model.HiringDate.Value.ToString("yyyy-MM-dd") : "No date provided")</td>
     </tr>
 </table>

@@ -25,7 +25,8 @@
         <tr>
             <td>@instructor.FirstName @instructor.LastName</td>
             <td>@instructor.Rank</td>
-            <td>@instructor.HiringDate.ToString("d")</td>
+            @*<td>@instructor.HiringDate.ToString("d")</td>*@
+            <td>@(instructor.HiringDate.HasValue ? instructor.HiringDate.Value.ToString("yyyy-MM-dd") : "No date provided")</td>
             <td>@(instructor.Status ? "Permanent" : "Probationary")</td>
             <td> <a class="btn btn-primary" a asp-action="showDetails" asp-route-id="@instructor.Id">Show Details</a> </td>
             <td><a class="btn btn-primary" a asp-action="EditInstructor" asp-route-id="@instructor.Id">Edit</a><a class="btn bttn2 btn-danger" a asp-action="DeleteInstructor" asp-route-id="@instructor.Id">Delete</a></td>

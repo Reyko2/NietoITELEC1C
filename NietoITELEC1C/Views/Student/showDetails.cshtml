@@ -28,6 +28,7 @@
     </tr>
     <tr>
         <th>Birthday Date</th>
-        <td>@Model.Birthday.ToString("d")</td>
+       @* <td>@Model.Birthday.ToString("d")</td> *@
+        <td>@(Model.Birthday.HasValue ? Model.Birthday.Value.ToString("yyyy-MM-dd") : "No date provided")</td>
     </tr>
 </table>

@@ -37,6 +37,10 @@ namespace NietoITELEC1C.Controllers
         [HttpPost]
         public IActionResult AddInstructor(Instructor newInstructor)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             _dbContext.Instructors.Add(newInstructor);
             //return View("Instructor", _fakeData.InstructorList);
             _dbContext.SaveChanges();
